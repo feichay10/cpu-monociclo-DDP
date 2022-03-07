@@ -8,33 +8,41 @@ always @(*)
       s_inc<=1'b0;
       s_inm<=1'b0;
       we3<=1'b0;
+      op_alu<=3'b0;
     end
   
   //Salto Condicional
   6'b001001:
     begin
-      if (z == 1'b1)
-        s_inc<=1'b0;
-      else
+      if (z == 1'b1) 
         s_inc<=1'b1;
+      else 
+        s_inc<=1'b0;
+      s_inm<=1'b0;
+      we3<=1'b0;
+      op_alu<=3'b0;
     end
 
   //Carga Inmediata
   6'b0000??:
     begin
-      s_inc<=1'b0;
-      s_inm
-      we3 
+      s_inc<=1'b1;
+      s_inm<=1'b1;
+      we3<=1'b1;
+      op_alu<=3'b0;
     end
 
   //ALU
-  6'b1001??:
-    begin
+  // 6'b1001??:
+  //   begin
 
-    end
+  //   end
+  
     default: 
-      s_inc<=1'b1;
-      s_inm<=1'b0;
-      we3<=1'b0;
+      begin
+        s_inc<=1'b1;
+        s_inm<=1'b0;
+        we3<=1'b0;
+      end
   endcase
 endmodule
