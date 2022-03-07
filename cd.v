@@ -8,7 +8,7 @@ wire alu_ffz;
 assign Uno_10bits = 10'b0000000001;
 
 // Program Counter: como lo hago? #(parameter WIDTH = 8)????
-registro #() PC (clk, reset, Mux_EntPC, SalPC);
+registro #(10) PC (clk, reset, Mux_EntPC, SalPC);
 
 // Memoria de Programa
 memprog memoria(clk, SalPC, instruccion);
@@ -17,7 +17,7 @@ memprog memoria(clk, SalPC, instruccion);
 sum sumador_A(SalPC, Uno_10bits, sum_mux);
 
 // Multiplexor A 
-mux2 #() multiplexor_A (instruccion[9:0], sum_mux, s_inc, Mux_EntPC);
+mux2 #(10) multiplexor_A (instruccion[9:0], sum_mux, s_inc, Mux_EntPC);
 
 // Banco de registros
 regfile banco_registros(clk, we3, instruccion[11:8], instruccion[7:4], instruccion[3:0], Mux_EntBR, R1, R2);
@@ -26,7 +26,7 @@ regfile banco_registros(clk, we3, instruccion[11:8], instruccion[7:4], instrucci
 alu alu_cpu(R1, R2, op_alu, Sal_alu, alu_ffz);
 
 // Multiplexor B 
-mux2 #() multiplexor_B (Sal_alu, instruccion[11:4], Mux_Sal_toBR);
+mux2 #(8) multiplexor_B (Sal_alu, instruccion[11:4], Mux_Sal_toBR);
 
 // Flip-Flop Z
 ffd ffz(clk, reset, alu_ffz, wez, z);

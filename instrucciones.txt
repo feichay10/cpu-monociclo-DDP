@@ -1,0 +1,11 @@
+Codificacion de cada instrucción:
+- Saltos: 6b'001???
+  - J:   001000
+  - JZ:  001001
+  - JNZ: 001010
+
+- Carga Inmediata: 6b'0000??
+
+- Oper. ALU: 6b'1001??
+
+
