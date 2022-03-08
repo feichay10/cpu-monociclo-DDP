@@ -2,13 +2,8 @@
 
 opcion=
 
-iverilog -o cpu_base cpu_tb2.v alu.v cd.v componentes.v cpu.v memprog.v uc.v
-if ( $(echo $?) != "0" ); then
-  exit 1
-fi
+iverilog -o cpu_base cpu_tb.v alu.v cd.v componentes.v cpu.v memprog.v uc.v
 vvp cpu_base
-
-
 
 echo
 echo

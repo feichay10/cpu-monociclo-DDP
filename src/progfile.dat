@@ -1,7 +1,7 @@
-0000_0000_0001_0001  //Instruccion carga inmediata del numero 1 al registro 1
-0000_0000_0000_0000  //Instruccion 1
-0000_0000_0000_0000  //Instruccion 2
-0000_0000_0000_0000  //Instruccion 3
+0000_0000_0001_0001  //Instruccion 0 carga inmediata del numero 1 al registro 1
+0010_0000_0000_0000  //Instruccion 1 salto incondicional
+0010_0000_0000_0000  //Instruccion 2 salto condicional
+1010_0001_0010_0011  //Instruccion 3 ALU Oper Reg1 + Reg2 -> Reg3
 0000_0000_0000_0000  //...
 0000_0000_0000_0000 
 0000_0000_0000_0000
