@@ -8,11 +8,11 @@ Codificacion de cada instrucción:
 
 - Oper. ALU: 6b'1000??
 
-1000
-1001
-1010
-1011
-1100
-1101
-1110
-1111
+1000 Oper. A
+1001 Oper. A negado
+1010 Oper. A + B
+1011 Oper. A - B
+1100 Oper. A AND B
+1101 Oper. A OR B
+1110 Oper. -A
+1111 Oper. -B
