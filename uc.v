@@ -2,13 +2,14 @@ module uc(input wire [5:0] opcode, input wire z, output reg s_inc, s_inm, we3, w
 
 always @(*)
   casez (opcode)
-  //Salto
+  //Salto incondicional
   6'b001000:
     begin
       s_inc<=1'b0;
       s_inm<=1'b0;
       we3<=1'b0;
-      op_alu<=3'b0;
+      wez<=1'b0;
+      op_alu<=3'b000;
     end
   
   //Salto Condicional
@@ -20,7 +21,8 @@ always @(*)
         s_inc<=1'b0;
       s_inm<=1'b0;
       we3<=1'b0;
-      op_alu<=3'b0;
+      wez<=1'b0;
+      op_alu<=3'b000;
     end
 
   //Carga Inmediata
@@ -29,20 +31,27 @@ always @(*)
       s_inc<=1'b1;
       s_inm<=1'b1;
       we3<=1'b1;
-      op_alu<=3'b0;
+      wez = 1'b0;
+      op_alu<=3'b000;
     end
 
   //ALU
-  // 6'b1001??:
-  //   begin
-
-  //   end
+  6'b1001??:
+    begin
+      s_inc<=1'b1;
+      s_inm<=1'b0;
+      we3<=1'b1;
+      wez<=1'b1;
+      op_alu<=3'b000
+    end
   
     default: 
       begin
         s_inc<=1'b1;
         s_inm<=1'b0;
         we3<=1'b0;
+        wez<=1'b0;
+        op_alu<=3'b000
       end
   endcase
 endmodule
