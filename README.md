@@ -42,5 +42,5 @@ Para comprobar el correcto funcionamiento e implementacion vamos a crear un pequ
 Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la tabla de la codificacion. En este caso la traduccion del codigo ensamblador a binario queda asi:
 
 <p align="center">
-  <img src="https://github.com/feichay10/cpu-monociclo-base/blob/96c8bdd6a0821d015c150d6e7d298b734499e66e/images/Codificacion%20binaria.png" />
+  <img src="https://github.com/feichay10/cpu-monociclo-base/blob/1d27d576b61de36126a827efbd20fd328081185e/images/Codificacion%20instrucciones.png" />
 </p>
