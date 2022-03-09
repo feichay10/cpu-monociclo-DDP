@@ -31,7 +31,7 @@ end
 initial
 
 begin
-  #(9*60);  //Esperamos 9 ciclos o 9 instrucciones
+  #(50*60);  //Esperamos 9 ciclos o 9 instrucciones
   $write ("R1 =%d\nR2 =%d =%d\n",
   cpu_tb.micpu.camino_datos.banco_registros.regb[1],
   cpu_tb.micpu.camino_datos.banco_registros.regb[2],

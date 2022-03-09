@@ -1,14 +1,11 @@
 0000_0000_0001_0001  //Instruccion 0 carga inmediata del numero 1 al registro 1
-0010_0000_0000_0000  //Instruccion 1 salto incondicional
-0010_0000_0000_0000  //Instruccion 2 salto condicional
-1010_0001_0010_0011  //Instruccion 3 ALU Oper Reg1 + Reg2 -> Reg3
-0000_0000_0000_0000  //Instruccion 4
-0000_0000_0000_0000  //...
-0000_0000_0000_0000
-0000_0000_0000_0000
-0000_0000_0000_0000
-0000_0000_0000_0000
-0000_0000_0000_0000
+0000_0000_1010_0010  //Instruccion 1 carga inmediata del numero 5 al registro 2
+0000_0000_0000_0011  //Instruccion 2 carga inmediata del numero 0 al registro 3
+1011_0010_0001_0010  //Instruccion 3 ALU Oper. A - B se guarda resultado en registro 2 (contador)
+0010_0100_0000_0111  //Instruccion 4 JZ fin (#7)
+1010_0001_0010_0011  //Instruccion 5 ALU Oper. A + B se guardar resultado en registro 3
+0010_0000_0000_0011  //Instruccion 6 J bucle (#3)
+0010_0000_0000_0111  //Instruccion 7 J fin (#7)
 0000_0000_0000_0000
 0000_0000_0000_0000
 0000_0000_0000_0000

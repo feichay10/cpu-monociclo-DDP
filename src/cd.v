@@ -11,7 +11,7 @@ registro #(10) PC (clk, reset, Mux_EntPC, SalPC);
 // Memoria de Programa
 memprog memoria(clk, SalPC, instruccion);
 
-// Sumador A (izquierdo)
+// Sumador A 
 sum sumador_A(SalPC, 10'b0000000001, sum_mux);
 
 // Multiplexor A 
