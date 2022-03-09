@@ -39,8 +39,32 @@ Para comprobar el correcto funcionamiento e implementacion vamos a crear un pequ
   <img src="https://github.com/feichay10/cpu-monociclo-base/blob/96c8bdd6a0821d015c150d6e7d298b734499e66e/images/ensamblador%20ejemplo.png" />
 </p>
 
-Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la tabla de la codificacion. En este caso la traduccion del codigo ensamblador a binario queda asi:
+Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la tabla de la codificacion. En este caso la traducción del codigo ensamblador a binario queda asi:
 
 <p align="center">
   <img src="https://github.com/feichay10/cpu-monociclo-base/blob/1d27d576b61de36126a827efbd20fd328081185e/images/Codificacion%20instrucciones.png" />
 </p>
+
+Para comprobar que la CPU está funcionando correctamente vamos a usar el programa `GTKWAVE` y vamos ver si se cumple el funcionamiento del codigo ensamblador:
+
+<p align="center">
+  <img src="https://github.com/feichay10/cpu-monociclo-base/blob/0d5f228c8a7e7b85cf2fb2710dac1f63a000f03c/images/gtkwave.png"/>
+</p>
+
+## Compilación
+Para compilar el programa, es recomendable usar el Script de Bash `compilation.sh`. Este script se encarga de hacer la compilación de forma automática y también genera el fichero `cpu_base` para mostrar los resultados del test. Además, genera otro fichero llamado `cpu_tb.vcd` para posterior análisis en el programa GTKWAVE. Desde el Script de Bash tras la compilacion y la ejecución del programa te pregunta si se quiere ejecutar el programa GTKWAVE.
+
+El comando utilizado para compilar es:
+```bash
+
+iverilog -o cpu_base cpu_tb.v alu.v cd.v componentes.v cpu.v memprog.v uc.v
+
+```
+Si queremos directamente compilar el programa, mostrar los resultados, generar los ficheros y acceder al GTKWAVE, podemos utilizar el programa `compilation.sh`. Solo hay que ejecutar el siguiente comando:
+```bash
+
+./compilation.sh
+
+```
+
+
