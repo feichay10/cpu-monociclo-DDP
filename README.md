@@ -64,7 +64,7 @@ Para comprobar el correcto funcionamiento e implementacion vamos a crear un pequ
 ```assembly
 program:
   li 1, r1        
-  li 10, r2        
+  li 5, r2        
   li 0, r3        
 bucle:
   sub r2, r1, r2  
@@ -80,7 +80,7 @@ Este programa en ensamblador lo vamos a codificar en binario en el fichero `prog
 
 ```
 0000_0000_0001_0001  //Instruccion 0 carga inmediata del numero 1 al registro 1
-0000_0000_1010_0010  //Instruccion 1 carga inmediata del numero 10 al registro 2
+0000_0000_0101_0010  //Instruccion 1 carga inmediata del numero 5 al registro 2
 0000_0000_0000_0011  //Instruccion 2 carga inmediata del numero 0 al registro 3
 1011_0010_0001_0010  //Instruccion 3 ALU Oper. A - B se guarda resultado en registro 2 (contador)
 0010_0100_0000_0111  //Instruccion 4 JZ fin (#7)
