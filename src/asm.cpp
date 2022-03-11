@@ -2,7 +2,7 @@
  * asm.c
  * Ensamblador configurable v0.1
  * Diseño de Procesadores
- *
+ * 
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,23 +18,23 @@
 //Nemónico de cada instrucción
 
 const char* mnemonics[] = { "mov", "cpl", ...  , "nop" };
+//                        <--- nº de instrucciones ---->
 
 //Opcode de cada instrucción
-
 const char* opcodes[] = { "0000", "0001", ... , "111011" };
+// Cada opcode corresponde con su nemonico
+
 
 // Operandos
-
 #define MAXNUMOPER 3      //Número máximo de operandos posibles en una instrucción
 
 // Codificación de los operandos de cada instrucción (C: cte datos, D: cte de dirección de código, R: campo de registro)
-
-const char* operands[] = { "CR", "CR", ... , "" };
+const char* operands[] = { "CR", "CR", ... , "" }; // misma dimension del array opcodes[]
 
 //Tamaños de operandos
-#define CONSTANTSIZE 8    //Tamaño en bits de una constante C (o dirección de datos si así se considera)
-#define REGFIELDSIZE 4     //Tamaño en bits de un campo de registro R
-#define DESTDIRSIZE  10    //Tamaño en bits de un campo de dirección de código D
+#define CONSTANTSIZE 8     //Tamaño en bits de una constante C (o dirección de datos si así se considera) -> en la ampliada 16 bit
+#define REGFIELDSIZE 4     //Tamaño en bits de un campo de registro R                                     -> 
+#define DESTDIRSIZE  10    //Tamaño en bits de un campo de dirección de código D                          -> 
 
 #define NUMINS (sizeof(mnemonics)/sizeof(mnemonics[0]))     //Número de instrucciones deducido de la matriz de nemónicos
 
@@ -43,10 +43,17 @@ const int posoper[NUMINS][MAXNUMOPER] = { {11, 3, 0},
                                           {11, 3, 0},
                                              ...
                                           {0, 0, 0} };
+//                                        <------->
+//                                       MAXNUMOPER
+//
+// Instruccion:    | OPCODE | C | R |
+//                 15     11   3   0
+
 
 //*************************************************************************************************************************************************************************
-// Normalmente no sería necesario tocar el código de más abajo para adaptar a un ensamblador nuevo, salvo código de proceso de operandos nuevos como salto relativo
+// Normalmente no sería necesario tocar el código de más abajo para adaptar a un ensamblador nuevo, salvo modificaciones en codificación de parámetros como salto relativo
 //*************************************************************************************************************************************************************************
+
 
 #define MAXLINE 256      //Tamaño máximo de una línea de ensamblador en caracteres
 
@@ -123,7 +130,7 @@ int findStr(const char* str, const char** liststr, int nelem) {
 
 void addSymbRef(const char* sym, int line, int pos, int bitpos, int numbits) {
     if (numRefs < MAXSYMBREFS) {
-        strcpy_s(tablaR[numRefs].Symbol, MAXSYMBOLLEN+1, sym);
+        strncpy(tablaR[numRefs].Symbol, sym, MAXSYMBOLLEN+1);
         tablaR[numRefs].LineRef = line;
         tablaR[numRefs].PosRef = pos;
         tablaR[numRefs].BitPos = bitpos;
@@ -138,7 +145,7 @@ void addSymbRef(const char* sym, int line, int pos, int bitpos, int numbits) {
 
 void addSymbol(const char* sym, int value, int srcline) {
     if (numSymb < MAXSYMBOLS) {
-        strcpy_s(tablaS[numSymb].Symbol, MAXSYMBOLLEN+1, sym);
+        strncpy(tablaS[numSymb].Symbol, sym, MAXSYMBOLLEN+1);
         tablaS[numSymb].Value = value;
         tablaS[numSymb].LineDef = srcline;
         printf("Insertando símbolo: '%s' con valor %u en pos %u de tabla de simbolos\n", sym, value, numSymb);
@@ -168,7 +175,7 @@ int getSymbolValue(const char* sym) {
             break;
         }
     }
-    printf("Buscando valor del simbolo '%s' y obtenido %d\n", sym, value);
+    printf("Buscando valor del simbolo <%s> y obtenido el valor %d\n", sym, value);
     return value;
 }
 
@@ -206,7 +213,7 @@ void processMnemonic(FILE* file, char* line, int numread, bool *code, int srclin
         *code = false;
         if ((strncmp("equ", line, numread) == 0) || (strncmp("EQU", line, numread) == 0)) { //Caso 'equ' (única pseudo ins por el momento)
             int cte, num;
-            num = fscanf_s(file, " %i", &cte);
+            num = fscanf(file, " %i", &cte);
             if (num == 1) {
                 int idx = getSymbolIdx(srcline);
                 if (idx < 0) {
@@ -240,14 +247,14 @@ void processMnemonic(FILE* file, char* line, int numread, bool *code, int srclin
         int num; //Valor devuelto pos scanf como numero de operandos reconocidos
         int ops[MAXNUMOPER] = { 0, 0, 0 }; //Operandos posibles, máximo tres operandos reales de los cuales solo uno puede ser un simbolo que se resolverá o no ahora 
         char simb[MAXSYMBOLLEN + 1] = ""; //símbolo
-        strncat_s(fmtStr, MAXLINE, " ", 1); //Permitimos ws iniciales
-        strncat_s(fmtStrSym, MAXLINE, " ", 1); //Permitimos ws iniciales
+        strcat(fmtStr, " "); //Permitimos ws iniciales
+        strcat(fmtStrSym, " "); //Permitimos ws iniciales
         for (int i = 0; i < numoper; i++) { //Procesamos cada tipo de operando​
             switch (operands[id][i]) { 
             case 'R':
-                strcat_s(fmtStr, MAXLINE, "%*[Rr]%2u"); //Registros, intentar leer dos caracteres de num. registro máximo
-                if (i != (numoper - 1)) strcat_s(fmtStr, MAXLINE, " , "); //Si no somos el último operando, consumir ws y coma enmedio
-                num = fscanf_s(file, fmtStr, &(ops[i]));
+                strcat(fmtStr, "%*[Rr]%2u"); //Registros, intentar leer dos caracteres de num. registro máximo
+                if (i != (numoper - 1)) strcat(fmtStr, " , "); //Si no somos el último operando, consumir ws y coma enmedio
+                num = fscanf(file, fmtStr, &(ops[i]));
                 if (num != 1) {
                     printf("Error buscando operando %d tipo registro con formato '%s' en línea %d\n", i + 1, fmtStr, srcline);
                     exit(1);
@@ -257,14 +264,14 @@ void processMnemonic(FILE* file, char* line, int numread, bool *code, int srclin
             case 'D':
                 //Podría ser simbólico, intentamos primero con ctes
                 posfile = ftell(file); //guardar posición del fichero de entrada
-                strcat_s(fmtStr, MAXLINE, "%i"); //Permite leer en hex, octal o decimal con notación del C,valores negativos en decimal (se codificarán en complemento a 2)
-                if (i != (numoper - 1)) strcat_s(fmtStr, MAXLINE, " , "); //Si no somos el último operando, consumir ws y coma enmedio
-                num = fscanf_s(file, fmtStr, &(ops[i]));
+                strcat(fmtStr, "%i"); //Permite leer en hex, octal o decimal con notación del C,valores negativos en decimal (se codificarán en complemento a 2)
+                if (i != (numoper - 1)) strcat(fmtStr, " , "); //Si no somos el último operando, consumir ws y coma enmedio
+                num = fscanf(file, fmtStr, &(ops[i]));
                 if (num != 1) { //No se pudo leer bien el operando
                     fseek(file, posfile, SEEK_SET); //restauramos pos en fichero
-                    strcat_s(fmtStrSym, MAXLINE, "%[^ ,\n\t]"); //Leer símbolo como cadena a ver 
-                    if (i != (numoper - 1)) strcat_s(fmtStrSym, MAXLINE, "%*[ ,\t]"); //si no somos ultimo operando quita espacios, tabs y coma siguientes
-                    num = fscanf_s(file, fmtStrSym, simb, MAXSYMBOLLEN);
+                    strcat(fmtStrSym, "%[^ ,\n\t]"); //Leer símbolo como cadena a ver 
+                    if (i != (numoper - 1)) strcat(fmtStrSym, "%*[ ,\t]"); //si no somos ultimo operando quita espacios, tabs y coma siguientes
+                    num = fscanf(file, fmtStrSym, simb);
                     if (num == 1) { //Ha habido suerte, ahora recuperar el valor del símbolo
                         int val = getSymbolValue(simb);
                         if (val != -1) { //Encontrado
@@ -445,7 +452,7 @@ void ensambla(char* srcfilename, char* dstfilename)
     int currentline = 1;
     bool codEmitido = false;
 
-    if (fopen_s(&infile, srcfilename, "r") != 0) //Se abre en modo texto
+    if ((infile = fopen(srcfilename, "r")) == NULL) //Se abre en modo texto
     {
         printf("ERROR: src file '%s' open failed\n", srcfilename);
         exit(1);
@@ -469,7 +476,7 @@ void ensambla(char* srcfilename, char* dstfilename)
             //printf("I: %s\n", instrucc);
             if (codEmitido && (counter < MAXPROGRAMLEN)) {
                 //printf("Copiando la cadena de instrucc %s de tamaño %zu sobre la cadena de contenido ->%s<-\n", instrucc, strlen(instrucc), (char *)progmem[counter]);
-                strcpy_s(progmem[counter], INSTSIZE+1, instrucc);
+                strncpy(progmem[counter], instrucc, INSTSIZE+1);
                 //printf("Programa en dir %u es instrucc %s\n",counter, progmem[counter]);
                 counter++;
             }
@@ -489,7 +496,7 @@ void ensambla(char* srcfilename, char* dstfilename)
         convBin(value, progmem[tablaR[i].PosRef] + (INSTSIZE - 1) - tablaR[i].BitPos, tablaR[i].Size);
     }
 
-    if (fopen_s(&outfile, dstfilename, "w") != 0) //Se abre en modo texto
+    if ((outfile = fopen(dstfilename, "w")) == NULL) //Se abre en modo texto
     {
         printf("ERROR: dest file open failed\n");
         exit(1);
