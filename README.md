@@ -29,6 +29,7 @@ operando de 4 bits (11-8, ra1), campo de segundo registro operando de 4 bits (7-
 registro de destino de 4 bits (3-0) donde se almacenará el resultado (siempre que el multiplexor tenga
 *s_inm* a cero). Estas instrucciones son las únicas que deben afectar al flag de cero Z.
 
+### Codificacion de las instrucciones
 <p><a name="codificacion">
    <img src="https://github.com/feichay10/cpu-monociclo-base/blob/96c8bdd6a0821d015c150d6e7d298b734499e66e/images/Codificacion%20de%20las%20instrucciones.png" />
 <a/></p>
@@ -69,7 +70,7 @@ fin:
   j fin           
 ```
 
-Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la <a href="#codificacion">tabla de codificación</a>. En este caso la traducción del codigo ensamblador a binario queda asi:
+Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la <a href="###codificacion">tabla de codificación</a>. En este caso la traducción del codigo ensamblador a binario queda asi:
 
 ```
 0000_0000_0001_0001  //Instruccion 0 carga inmediata del numero 1 al registro 1
