@@ -70,7 +70,7 @@ fin:
   j fin           
 ```
 
-Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la <a href="###codificacion">tabla de codificación</a>. En este caso la traducción del codigo ensamblador a binario queda asi:
+Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la <a href="codificacion">tabla de codificación</a>. En este caso la traducción del codigo ensamblador a binario queda asi:
 
 ```
 0000_0000_0001_0001  //Instruccion 0 carga inmediata del numero 1 al registro 1
