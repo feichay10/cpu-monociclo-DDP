@@ -33,18 +33,55 @@ registro de destino de 4 bits (3-0) donde se almacenará el resultado (siempre q
   <img src="https://github.com/feichay10/cpu-monociclo-base/blob/96c8bdd6a0821d015c150d6e7d298b734499e66e/images/Codificacion%20de%20las%20instrucciones.png" />
 </p>
 
+## Instrucciones implementadas
+| INSTRUCCIÓN      | OPCODE | DESCRIPCIÓN                                |                               |
+| :--------------: | :----: | :----------------------------------------: | :---------------------------: |
+| **LOAD**         | 0000?? | Carga un determinado valor en un registro  | Instrucción de carga          |
+|                  |        |                                            |                               |
+| **J**            | 001000 | Salto incondicional                        | Instrucción de salto          |
+| **JZ**           | 001001 | Salto si el flag de 0 está activo          | Instrucción de salto          |
+| **JNZ**          | 001010 | Salto si el flag de 0 no está activo       | Instrucción de salto          |
+|                  |        |                                            |                               |
+| **A**            | 1000?? | Salida de ALU = A                          | Instrucción Aritmetico-Logica |
+| **~A**           | 1001?? | Salida de ALU = A negada                   | Instrucción Aritmetico-Logica |
+| **ADD**          | 1010?? | Salida de ALU = Suma                       | Instrucción Aritmetico-Logica |
+| **SUB**          | 1011?? | Salida de ALU = Resta                      | Instrucción Aritmetico-Logica |
+| **AND**          | 1100?? | Salida de ALU = Operacion AND entre bits   | Instrucción Aritmetico-Logica |
+| **OR**           | 1101?? | Salida de ALU = Operacion OR entre bits    | Instrucción Aritmetico-Logica |
+| **-A**           | 1110?? | Salida de ALU = Negar operando A           | Instrucción Aritmetico-Logica |
+| **-B**           | 1111?? | Salida de ALU = Negar operando B           | Instrucción Aritmetico-Logica |
+
+
 ## Funcionamiento
 Para comprobar el correcto funcionamiento e implementacion vamos a crear un pequeño programa en ensamblador:
-<p align="center">
-  <img src="https://github.com/feichay10/cpu-monociclo-base/blob/96c8bdd6a0821d015c150d6e7d298b734499e66e/images/ensamblador%20ejemplo.png" />
-</p>
+```assembly
+program:
+  li 1, r1        
+  li 10, r2        
+  li 0, r3        
+bucle:
+  sub r2, r1, r2  
+  jz fin          
+  add r1, r2, r3  
+  j bucle         
+
+fin:
+  j fin           
+```
 
 Este programa en ensamblador lo vamos a codificar en binario en el fichero `progfile.dat`, antes de eso tenemos que codificar las diferentes instrucciones en la unidad de control, en el fichero `instrucciones.txt` se puede ver como hice la codificación de las instrucciones. Para hacer la codificacion tenemos que fijarnos en la tabla de la codificacion. En este caso la traducción del codigo ensamblador a binario queda asi:
 
-<p align="center">
-  <img src="https://github.com/feichay10/cpu-monociclo-base/blob/1d27d576b61de36126a827efbd20fd328081185e/images/Codificacion%20instrucciones.png" />
-</p>
-
+```
+0000_0000_0001_0001  //Instruccion 0 carga inmediata del numero 1 al registro 1
+0000_0000_1010_0010  //Instruccion 1 carga inmediata del numero 10 al registro 2
+0000_0000_0000_0011  //Instruccion 2 carga inmediata del numero 0 al registro 3
+1011_0010_0001_0010  //Instruccion 3 ALU Oper. A - B se guarda resultado en registro 2 (contador)
+0010_0100_0000_0111  //Instruccion 4 JZ fin (#7)
+1010_0001_0010_0011  //Instruccion 5 ALU Oper. A + B se guardar resultado en registro 3
+0010_0000_0000_0011  //Instruccion 6 J bucle (#3)
+0010_0000_0000_0111  //Instruccion 7 J fin (#7)          
+```
+### Resultado en GTKWave
 Para comprobar que la CPU está funcionando correctamente vamos a usar el programa `GTKWAVE` y vamos ver si se cumple el funcionamiento del codigo ensamblador:
 
 <p align="center">
@@ -56,15 +93,11 @@ Para compilar el programa, es recomendable usar el Script de Bash `compilation.s
 
 El comando utilizado para compilar es:
 ```bash
-
 iverilog -o cpu_base cpu_tb.v alu.v cd.v componentes.v cpu.v memprog.v uc.v
-
 ```
 Si queremos directamente compilar el programa, mostrar los resultados, generar los ficheros y acceder al GTKWAVE, podemos utilizar el programa `compilation.sh`. Solo hay que ejecutar el siguiente comando:
 ```bash
-
 ./compilation.sh
-
 ```
 
 
