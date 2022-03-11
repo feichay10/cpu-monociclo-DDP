@@ -2,10 +2,10 @@
 Proyecto 1 de Diseño de Procesadores. CPU monociclo base
 
 ## Table of Contents
-1. [Objetivo](#Objetivo).
-2. [Instrucciones implementadas](#Instrucciones-implementadas).
-3. [Funcionamiento](#Funcionamiento).
-4. [Compilación](#Compilación).
+1. [Objetivo](#Objetivo)
+2. [Instrucciones implementadas](#Instrucciones-implementadas)
+3. [Funcionamiento](#Funcionamiento)
+4. [Compilación](#Compilación)
 
 ### Objetivo
 El objetivo de este proyecto es diseñar la unidad de control de un procesador. Nos vamos a centrar en un procesador de un sólo ciclo. Para que un procesador pueda ejecutar instrucciones en un solo ciclo sin recurrir al paralelismo en su implementación debemos separar las memorias de instrucciones y de datos de forma que se pueda realizar el acceso a ambas dentro del mismo ciclo. 
