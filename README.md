@@ -8,7 +8,7 @@ Proyecto 1 de Diseño de Procesadores. CPU monociclo base
 4. [Compilación](#Compilación)
 
 ### Objetivo
-El objetivo de este proyecto es diseñar la unidad de control de un procesador. Nos vamos a centrar en un procesador de un sólo ciclo. Para que un procesador pueda ejecutar instrucciones en un solo ciclo sin recurrir al paralelismo en su implementación debemos separar las memorias de instrucciones y de datos de forma que se pueda realizar el acceso a ambas dentro del mismo ciclo. 
+El objetivo de este proyecto es diseñar la unidad de control en **Verilog** de un procesador. Nos vamos a centrar en un procesador de un sólo ciclo. Para que un procesador pueda ejecutar instrucciones en un solo ciclo sin recurrir al paralelismo en su implementación debemos separar las memorias de instrucciones y de datos de forma que se pueda realizar el acceso a ambas dentro del mismo ciclo. 
 
 Esta estructura es típica de algunos microcontroladores, procesadores muy sencillos con una memoria de programa no volátil, diseñados para funcionar integrados en otro artefacto como una lavadora o un coche, realizando el control del mismo.
 
