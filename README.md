@@ -106,5 +106,3 @@ Si queremos directamente compilar el programa, mostrar los resultados, generar l
 ```bash
 ./compilation.sh
 ```
-
-
