@@ -1,7 +1,7 @@
 # CPU-monociclo-base
 Proyecto 1 de Diseño de Procesadores. CPU monociclo base
 
-## Table of Contents
+## Índice
 1. [Objetivo](#Objetivo)
 2. [Instrucciones implementadas](#Instrucciones-implementadas)
 3. [Funcionamiento](#Funcionamiento)
