@@ -5,7 +5,7 @@ wire [9:0] Mux_EntPC, SalPC, sum_mux, Mux_EntBR;
 wire [7:0] R1, R2, Sal_alu, Mux_Sal_toBR;
 wire alu_ffz;
 
-// Program Counter: como lo hago? #(parameter WIDTH = 8)????
+// Program Counter: 
 registro #(10) PC (clk, reset, Mux_EntPC, SalPC);
 
 // Memoria de Programa
