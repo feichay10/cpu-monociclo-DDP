@@ -1,14 +1,14 @@
 # CPU-monociclo-base
 Proyecto 1 de Diseño de Procesadores. CPU monociclo base
 
-## Table of Contents
-1. [Objetivo](#Objetivo).
-2. [Instrucciones implementadas](#Instrucciones-implementadas).
-3. [Funcionamiento](#Funcionamiento).
-4. [Compilación](#Compilación).
+## Índice
+1. [Objetivo](#Objetivo)
+2. [Instrucciones implementadas](#Instrucciones-implementadas)
+3. [Funcionamiento](#Funcionamiento)
+4. [Compilación](#Compilación)
 
 ### Objetivo
-El objetivo de este proyecto es diseñar la unidad de control de un procesador. Nos vamos a centrar en un procesador de un sólo ciclo. Para que un procesador pueda ejecutar instrucciones en un solo ciclo sin recurrir al paralelismo en su implementación debemos separar las memorias de instrucciones y de datos de forma que se pueda realizar el acceso a ambas dentro del mismo ciclo. 
+El objetivo de este proyecto es diseñar la unidad de control en **Verilog** de un procesador. Nos vamos a centrar en un procesador de un sólo ciclo. Para que un procesador pueda ejecutar instrucciones en un solo ciclo sin recurrir al paralelismo en su implementación debemos separar las memorias de instrucciones y de datos de forma que se pueda realizar el acceso a ambas dentro del mismo ciclo. 
 
 Esta estructura es típica de algunos microcontroladores, procesadores muy sencillos con una memoria de programa no volátil, diseñados para funcionar integrados en otro artefacto como una lavadora o un coche, realizando el control del mismo.
 
@@ -37,7 +37,7 @@ registro de destino de 4 bits (3-0) donde se almacenará el resultado (siempre q
 
 **Codificacion de las instrucciones**
 <p><a name="codificacion">
-   <img src="https://github.com/feichay10/cpu-monociclo-base/blob/96c8bdd6a0821d015c150d6e7d298b734499e66e/images/Codificacion%20de%20las%20instrucciones.png" />
+   <img src="https://github.com/feichay10/cpu-monociclo-base/blob/33b9c81c761232d3af5d43b8acd7897b11583b22/images/Codificacion%20de%20las%20instrucciones.png" />
 <a/></p>
 
 ### Instrucciones implementadas
@@ -64,7 +64,7 @@ Para comprobar el correcto funcionamiento e implementacion vamos a crear un pequ
 ```assembly
 program:
   li 1, r1        
-  li 10, r2        
+  li 5, r2        
   li 0, r3        
 bucle:
   sub r2, r1, r2  
@@ -80,7 +80,7 @@ Este programa en ensamblador lo vamos a codificar en binario en el fichero `prog
 
 ```
 0000_0000_0001_0001  //Instruccion 0 carga inmediata del numero 1 al registro 1
-0000_0000_1010_0010  //Instruccion 1 carga inmediata del numero 10 al registro 2
+0000_0000_0101_0010  //Instruccion 1 carga inmediata del numero 5 al registro 2
 0000_0000_0000_0011  //Instruccion 2 carga inmediata del numero 0 al registro 3
 1011_0010_0001_0010  //Instruccion 3 ALU Oper. A - B se guarda resultado en registro 2 (contador)
 0010_0100_0000_0111  //Instruccion 4 JZ fin (#7)
@@ -92,7 +92,7 @@ Este programa en ensamblador lo vamos a codificar en binario en el fichero `prog
 Para comprobar que la CPU está funcionando correctamente vamos a usar el programa `GTKWAVE` y vamos ver si se cumple el funcionamiento del codigo ensamblador:
 
 <p align="center">
-  <img src="https://github.com/feichay10/cpu-monociclo-base/blob/0d5f228c8a7e7b85cf2fb2710dac1f63a000f03c/images/gtkwave.png"/>
+  <img src="https://github.com/feichay10/cpu-monociclo-base/blob/424564e85d6e3973f04052e6be4f405d04893243/images/gtkwave_ejemplo.png"/>
 </p>
 
 ### Compilación
@@ -106,5 +106,3 @@ Si queremos directamente compilar el programa, mostrar los resultados, generar l
 ```bash
 ./compilation.sh
 ```
-
-
