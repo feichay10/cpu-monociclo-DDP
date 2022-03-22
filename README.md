@@ -1,5 +1,5 @@
-# CPU-monociclo-base
-Proyecto 1 de Diseño de Procesadores. CPU monociclo base
+# CPU-monociclo
+Proyecto 1 de Diseño de Procesadores. CPU monociclo
 
 ## Índice
 1. [Objetivo](#Objetivo)
