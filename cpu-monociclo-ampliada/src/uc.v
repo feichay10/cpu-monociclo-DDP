@@ -78,7 +78,7 @@ always @(opcode)
       pop=1'b1;
     end 
 
-  //Carga Inmediata
+  //Carga Inmediata LI
   6'b0000??:
     begin
       s_inc=1'b1;
@@ -90,6 +90,8 @@ always @(opcode)
       push=1'b0;
       pop=1'b0;
     end
+
+  // ######## Operaciones de ALU Inmediatos ########
 
   //ALU (Oper. A)
   6'b1000??:
@@ -103,7 +105,7 @@ always @(opcode)
       push=1'b0;
       pop=1'b0;
     end
-  
+
   //ALU (Oper. A negado)
   6'b1001??:
   begin
