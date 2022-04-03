@@ -1,5 +1,5 @@
 $date
-	Sun Mar 20 22:41:27 2022
+	Sun Apr  3 21:42:43 2022
 $end
 $version
 	Icarus Verilog
@@ -15,13 +15,13 @@ $var wire 1 ! clk $end
 $var wire 16 # direcciones [15:0] $end
 $var wire 1 $ oe $end
 $var wire 1 " reset $end
-$var wire 1 % s_mux_alu $end
-$var wire 1 & z $end
-$var wire 1 ' wez $end
-$var wire 1 ( we3 $end
-$var wire 1 ) s_stack_mux $end
-$var wire 1 * s_inm $end
-$var wire 1 + s_inc $end
+$var wire 1 % z $end
+$var wire 1 & wez $end
+$var wire 1 ' we3 $end
+$var wire 1 ( s_pila $end
+$var wire 1 ) s_inm $end
+$var wire 1 * s_inc $end
+$var wire 1 + s_datos $end
 $var wire 1 , push $end
 $var wire 1 - pop $end
 $var wire 6 . opcode [5:0] $end
@@ -33,13 +33,13 @@ $var wire 1 ! clk $end
 $var wire 16 2 direcciones [15:0] $end
 $var wire 1 $ oe $end
 $var wire 1 " reset $end
-$var wire 1 % s_mux_alu $end
-$var wire 1 & z $end
-$var wire 1 ' wez $end
-$var wire 1 ( we3 $end
-$var wire 1 ) s_stack_mux $end
-$var wire 1 * s_inm $end
-$var wire 1 + s_inc $end
+$var wire 1 % z $end
+$var wire 1 & wez $end
+$var wire 1 ' we3 $end
+$var wire 1 ( s_pila $end
+$var wire 1 ) s_inm $end
+$var wire 1 * s_inc $end
+$var wire 1 + s_datos $end
 $var wire 1 , push $end
 $var wire 1 - pop $end
 $var wire 6 3 opcode [5:0] $end
@@ -67,7 +67,7 @@ $upscope $end
 $scope module Sumto_multiplexor $end
 $var wire 10 E d0 [9:0] $end
 $var wire 10 F y [9:0] $end
-$var wire 1 + s $end
+$var wire 1 * s $end
 $var wire 10 G d1 [9:0] $end
 $upscope $end
 $scope module alu_cpu $end
@@ -83,7 +83,7 @@ $var wire 1 ! clk $end
 $var wire 4 M ra1 [3:0] $end
 $var wire 4 N ra2 [3:0] $end
 $var wire 4 O wa3 [3:0] $end
-$var wire 1 ( we3 $end
+$var wire 1 ' we3 $end
 $var wire 16 P wd3 [15:0] $end
 $var wire 16 Q rd2 [15:0] $end
 $var wire 16 R rd1 [15:0] $end
@@ -92,8 +92,8 @@ $scope module ffz $end
 $var wire 1 ! clk $end
 $var wire 1 1 d $end
 $var wire 1 " reset $end
-$var wire 1 ' carga $end
-$var reg 1 & q $end
+$var wire 1 & carga $end
+$var reg 1 % q $end
 $upscope $end
 $scope module memoria $end
 $var wire 10 S a [9:0] $end
@@ -103,20 +103,20 @@ $upscope $end
 $scope module multiplexor_toPC $end
 $var wire 10 U d1 [9:0] $end
 $var wire 10 V y [9:0] $end
-$var wire 1 ) s $end
+$var wire 1 ( s $end
 $var wire 10 W d0 [9:0] $end
 $upscope $end
 $scope module mux_Inm $end
 $var wire 16 X d0 [15:0] $end
 $var wire 16 Y y [15:0] $end
-$var wire 1 * s $end
+$var wire 1 + s $end
 $var wire 16 Z d1 [15:0] $end
 $upscope $end
 $scope module mux_toALU $end
 $var wire 16 [ d0 [15:0] $end
 $var wire 16 \ d1 [15:0] $end
-$var wire 1 % s $end
 $var wire 16 ] y [15:0] $end
+$var wire 1 ) s $end
 $upscope $end
 $scope module stack $end
 $var wire 1 ! clk $end
@@ -143,15 +143,16 @@ $upscope $end
 $upscope $end
 $scope module unidad_control $end
 $var wire 6 g opcode [5:0] $end
-$var wire 1 & z $end
+$var wire 1 % z $end
 $var reg 3 h op_alu [2:0] $end
 $var reg 1 - pop $end
 $var reg 1 , push $end
-$var reg 1 + s_inc $end
-$var reg 1 * s_inm $end
-$var reg 1 ) s_stack_mux $end
-$var reg 1 ( we3 $end
-$var reg 1 ' wez $end
+$var reg 1 + s_datos $end
+$var reg 1 * s_inc $end
+$var reg 1 ) s_inm $end
+$var reg 1 ( s_pila $end
+$var reg 1 ' we3 $end
+$var reg 1 & wez $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -189,7 +190,7 @@ b0 k
 b0 j
 b0 i
 b0 h
-b0 g
+b100000 g
 bx f
 bx e
 b0 d
@@ -199,63 +200,63 @@ b1 a
 b0 `
 b1 _
 bx ^
-b0x000x ]
+b0 ]
 b0 \
 b10001 [
 bx Z
-bx Y
-b0x000x X
+b0 Y
+b0 X
 bx W
 bx V
 b1 U
-b10001 T
+b10000000000000000000000000010001 T
 b0 S
 b0 R
 b0 Q
-bx P
+b0 P
 b0 O
 b0 N
 b0 M
-b0x000x L
-b0x000x K
+b0 L
+b0 K
 b0 J
 b0 I
-b0x000x H
+b0 H
 b1 G
 b1 F
 b10001 E
 b0 D
 bx C
-bx B
+b0 B
 bx A
 b0 @
 b0 ?
-b0x000x >
-b0x000x =
+b0 >
+b0 =
 b1 <
 b0 ;
 bx :
 b1 9
 bx 8
-x7
+17
 bx 6
-b10001 5
+b10000000000000000000000000010001 5
 b0 4
-b0 3
+b100000 3
 bz 2
 z1
 bx 0
 b0 /
-b0 .
+b100000 .
 0-
 0,
-1+
+0+
 1*
-0)
-1(
-0'
-0&
-z%
+1)
+0(
+1'
+1&
+0%
 z$
 bz #
 1"
@@ -266,6 +267,7 @@ $end
 #3000
 0!
 #6000
+x7
 b0xxxxxxxx B
 b0xxxxxxxx P
 b0xxxxxxxx Y
@@ -273,12 +275,13 @@ b0xxxxxxxx >
 b0xxxxxxxx H
 b0xxxxxxxx X
 bx L
-0(
-0*
-0+
 bx =
 bx K
 bx ]
+0&
+0'
+0)
+0*
 b0xxxxxxxx ?
 b0xxxxxxxx J
 b0xxxxxxxx Q
@@ -297,6 +300,7 @@ bx E
 bx <
 bx F
 bx U
+z%
 bx 5
 bx T
 bx 9

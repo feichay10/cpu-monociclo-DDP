@@ -18,11 +18,11 @@
 
 //Nemónico de cada instrucción
 
-const char* mnemonics[] = { "J", "JZ", "JNZ", "JCALL", "JR", "LI" };
+const char* mnemonics[] = { "j", "jz", "jnz", "jcall", "jr", "li", "not", "add", "sub", "and", "or", "neg"};
 
 //Opcode de cada instrucción
 
-const char* opcodes[] = { "00001000", "001001", "001010", "001011", "001100", "0000" };
+const char* opcodes[] = { "001000", "001001", "001010", "001011", "001100", "1000", "1001", "1010", "1011", "1100", "1101", "1110" };
 
 // Operandos
 
@@ -30,20 +30,28 @@ const char* opcodes[] = { "00001000", "001001", "001010", "001011", "001100", "0
 
 // Codificación de los operandos de cada instrucción (C: cte datos, D: cte de dirección de código, R: campo de registro)
 
-const char* operands[] = { "CR", "CR", ... , "" };
+const char* operands[] = { "D", "D", "D", "D", "D", "CR", "RR", "RRR", "RRR", "RR", "RR", "RR"};
 
 //Tamaños de operandos
-#define CONSTANTSIZE 8     //Tamaño en bits de una constante C (o dirección de datos si así se considera)
+#define CONSTANTSIZE 16     //Tamaño en bits de una constante C (o dirección de datos si así se considera)
 #define REGFIELDSIZE 4     //Tamaño en bits de un campo de registro R
 #define DESTDIRSIZE  10    //Tamaño en bits de un campo de dirección de código D
 
 #define NUMINS (sizeof(mnemonics)/sizeof(mnemonics[0]))     //Número de instrucciones deducido de la matriz de nemónicos
 
 //Posiciones (bit más significativo) de los operandos en la instrucción (de INSTSIZE-1 a 1), 0 significa no usado (no hay operandos de sólo 1 bit)
-const int posoper[NUMINS][MAXNUMOPER] = { {11, 3, 0},
-                                          {11, 3, 0},
-                                             ...
-                                          {0, 0, 0} };
+const int posoper[NUMINS][MAXNUMOPER] = { {10, 0, 0},
+                                          {10, 0, 0},
+                                          {10, 0, 0},
+                                          {10, 0, 0},
+                                          {10, 0, 0},
+                                          {19, 3, 0},
+                                          {11, 7, 3},
+                                          {11, 7, 3},
+                                          {11, 7, 3},
+                                          {11, 7, 3},
+                                          {11, 7, 3},
+                                          {11, 7, 3}};
 
 //*************************************************************************************************************************************************************************
 // Normalmente no sería necesario tocar el código de más abajo para adaptar a un ensamblador nuevo, salvo modificaciones en codificación de parámetros como salto relativo
@@ -115,6 +123,7 @@ void convBin(unsigned int number, char* destStr, size_t numchars) {
 
 int findStr(const char* str, const char** liststr, int nelem) {
     int i;
+
     for (i = 0; i < nelem; i++) {
         if (strcmp(liststr[i], str) == 0) {
             return i;
@@ -507,8 +516,8 @@ void ensambla(char* srcfilename, char* dstfilename)
 }
 
 int main(int argc, char* argv[]){
-    char srcfilename[] = "prueba.asm";
-    char dstfilename[] = "progfile.dat";
+    char srcfilename[] = "../ensamblador/prueba.asm";
+    char dstfilename[] = "../src/progfile.dat";
 
     ensambla(srcfilename, dstfilename);
 }
