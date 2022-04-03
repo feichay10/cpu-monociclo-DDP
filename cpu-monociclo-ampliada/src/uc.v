@@ -3,7 +3,7 @@ module uc(input wire [5:0] opcode, input wire z, output reg s_inc, s_inm, we3, w
 always @(opcode)
   casex (opcode)
   // ######## Instrucciones de Salto ########
-  //Salto incondicional
+  //Salto incondicional J
   6'b001000:
     begin
       s_inc=1'b0;
@@ -187,7 +187,7 @@ always @(opcode)
   // ######## Operaciones de ALU con registros ########
 
   //ALU (Oper. A) MOV
-  6'b1000??:
+  6'b010000:
     begin
       s_inc=1'b1;
       s_inm=1'b0;
@@ -201,7 +201,7 @@ always @(opcode)
     end
 
   //ALU (Oper. A negado) ~A - NOT
-  6'b1001??:
+  6'b010001:
   begin
     s_inc=1'b1;
     s_inm=1'b0;
@@ -215,7 +215,7 @@ always @(opcode)
   end
 
   //ALU (Oper. A + B) ADD
-  6'b1010??:
+  6'b010010:
   begin
     s_inc=1'b1;
     s_inm=1'b0;
@@ -229,7 +229,7 @@ always @(opcode)
   end
 
   //ALU (Oper. A - B) SUB
-  6'b1011??:
+  6'b010011:
   begin
     s_inc=1'b1;
     s_inm=1'b0;
@@ -243,7 +243,7 @@ always @(opcode)
   end
 
   //ALU (Oper. A AND B) AND
-  6'b1100??:
+  6'b010100:
   begin
     s_inc=1'b1;
     s_inm=1'b0;
@@ -257,7 +257,7 @@ always @(opcode)
   end
 
   //ALU (Oper. A OR B) OR
-  6'b1101??:
+  6'b010101:
   begin
     s_inc=1'b1;
     s_inm=1'b0;
@@ -271,7 +271,7 @@ always @(opcode)
   end
 
   //ALU (Oper. -A) NEG
-  6'b1110??:
+  6'b010110:
   begin
     s_inc=1'b1;
     s_inm=1'b0;
@@ -290,7 +290,7 @@ always @(opcode)
       s_inm=1'b0;
       we3=1'b0;
       wez=1'b0;
-      op_alu=3'b000;
+      op_alu=3'b000; 
       s_pila=1'b0;
       s_datos=1'b0;
       push=1'b0;

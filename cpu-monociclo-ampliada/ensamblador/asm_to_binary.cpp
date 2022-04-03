@@ -18,11 +18,11 @@
 
 //Nemónico de cada instrucción
 
-const char* mnemonics[] = { "j", "jz", "jnz", "jcall", "jr", "li", "not", "add", "sub", "and", "or", "neg"};
+const char* mnemonics[] = { "j", "jz", "jnz", "jcall", "jr", "li", "noti", "addi", "subi", "andi", "ori", "negi" , "mov", "not", "add", "sub", "and", "or", "neg"};
 
 //Opcode de cada instrucción
 
-const char* opcodes[] = { "001000", "001001", "001010", "001011", "001100", "1000", "1001", "1010", "1011", "1100", "1101", "1110" };
+const char* opcodes[] = { "001000", "001001", "001010", "001011", "001100", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "010000", "010001", "010010", "010011", "010100", "010101", "010110"};
 
 // Operandos
 
@@ -30,7 +30,7 @@ const char* opcodes[] = { "001000", "001001", "001010", "001011", "001100", "100
 
 // Codificación de los operandos de cada instrucción (C: cte datos, D: cte de dirección de código, R: campo de registro)
 
-const char* operands[] = { "D", "D", "D", "D", "D", "CR", "RR", "RRR", "RRR", "RR", "RR", "RR"};
+const char* operands[] = { "D", "D", "D", "D", "D", "CR", "RC", "RC", "RRC", "RRC", "RRC", "RRC", "RC", "RR", "RR", "RRR", "RRR", "RRR", "RRR", "RR";
 
 //Tamaños de operandos
 #define CONSTANTSIZE 16     //Tamaño en bits de una constante C (o dirección de datos si así se considera)
@@ -40,18 +40,25 @@ const char* operands[] = { "D", "D", "D", "D", "D", "CR", "RR", "RRR", "RRR", "R
 #define NUMINS (sizeof(mnemonics)/sizeof(mnemonics[0]))     //Número de instrucciones deducido de la matriz de nemónicos
 
 //Posiciones (bit más significativo) de los operandos en la instrucción (de INSTSIZE-1 a 1), 0 significa no usado (no hay operandos de sólo 1 bit)
-const int posoper[NUMINS][MAXNUMOPER] = { {10, 0, 0},
-                                          {10, 0, 0},
-                                          {10, 0, 0},
-                                          {10, 0, 0},
-                                          {10, 0, 0},
-                                          {19, 3, 0},
-                                          {11, 7, 3},
-                                          {11, 7, 3},
-                                          {11, 7, 3},
-                                          {11, 7, 3},
-                                          {11, 7, 3},
-                                          {11, 7, 3}};
+const int posoper[NUMINS][MAXNUMOPER] = { {9, 0, 0},    //J
+                                          {9, 0, 0},    //JZ
+                                          {9, 0, 0},    //JNZ
+                                          {9, 0, 0},    //JCALL
+                                          {9, 0, 0},    //JR
+                                          {25, 15, 0},  //LI
+                                          {25, 15, 0},  //NOTI
+                                          {25, 21, 15}, //ADDI
+                                          {25, 21, 15}, //SUBI
+                                          {25, 21, 15}, //ANDI
+                                          {25, 21, 15}, //ORI
+                                          {25, 15, 0},  //NEGI
+                                          {25, 17, 0},  // MOV
+                                          {25, 17, 0},  // NOT
+                                          {25, 21, 17}, // ADD
+                                          {25, 21, 17}, // SUB
+                                          {25, 21, 17}, // AND
+                                          {25, 21, 17}, // OR
+                                          {25, 21, 0}}; // NEG
 
 //*************************************************************************************************************************************************************************
 // Normalmente no sería necesario tocar el código de más abajo para adaptar a un ensamblador nuevo, salvo modificaciones en codificación de parámetros como salto relativo
