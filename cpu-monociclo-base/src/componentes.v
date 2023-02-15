@@ -1,8 +1,28 @@
+/**
+ *
+ * Universidad de La Laguna
+ * Escuela Superior de IngenierÃ­a y TecnologÃ­a
+ * Grado en IngenierÃ­a InformÃ¡tica
+ * Asignatura: DiseÃ±o de Procesadores
+ * Curso: 3Âº
+ * Proyecto 1: DiseÃ±o de la unidad de control de una CPU simple de un solo ciclo
+ * @file componentes.v
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief 
+ * @version 0.1
+ * @date 01-02-2023
+ * @compilation: iverilog -o cpu_base cpu_tb.v alu.v cd.v componentes.v cpu.v memprog.v uc.v
+ * @simulation: vvp cpu_base
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 //Componentes varios
 
 //Banco de registros de dos salidas y una entrada
 module regfile(input  wire        clk, 
-               input  wire        we3,           //señal de habilitación de escritura
+               input  wire        we3,           //seï¿½al de habilitaciï¿½n de escritura
                input  wire [3:0]  ra1, ra2, wa3, //direcciones de regs leidos y reg a escribir
                input  wire [7:0]  wd3, 			 //dato a escribir
                output wire [7:0]  rd1, rd2);     //datos leidos
@@ -57,7 +77,7 @@ module mux2 #(parameter WIDTH = 8)
 endmodule
 
 //Biestable para el flag de cero
-//Biestable tipo D síncrono con reset asíncrono por flanco y entrada de habilitación de carga
+//Biestable tipo D sï¿½ncrono con reset asï¿½ncrono por flanco y entrada de habilitaciï¿½n de carga
 module ffd(input wire clk, reset, d, carga, output reg q);
 
   always @(posedge clk, posedge reset)
