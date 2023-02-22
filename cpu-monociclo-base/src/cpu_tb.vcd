@@ -1,5 +1,5 @@
 $date
-	Wed Feb 22 09:54:31 2023
+	Wed Feb 22 10:12:42 2023
 $end
 $version
 	Icarus Verilog
@@ -104,9 +104,39 @@ $var reg 1 $ wez $end
 $upscope $end
 $upscope $end
 $upscope $end
+$scope module cpu_tb $end
+$scope module micpu $end
+$scope module caminodatos $end
+$scope module BancoReg $end
+$var reg 8 O \regb[1] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module micpu $end
+$scope module caminodatos $end
+$scope module BancoReg $end
+$var reg 8 P \regb[2] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module micpu $end
+$scope module caminodatos $end
+$scope module BancoReg $end
+$var reg 8 Q \regb[3] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
 $enddefinitions $end
 #0
 $dumpvars
+b0 Q
+b0 P
+b0 O
 b0 N
 b0 M
 b1 L
@@ -169,6 +199,7 @@ b101 F
 b10 <
 b101 ;
 b1010010 B
+b1 O
 b10 .
 b10 D
 b10 L
@@ -192,6 +223,7 @@ b0 F
 b11 <
 b0 ;
 b11 B
+b101 P
 b11 .
 b11 D
 b11 L
@@ -236,6 +268,7 @@ b10 <
 b1 ;
 b10 :
 b1000010010 B
+b0 Q
 b100 .
 b100 D
 b100 L
@@ -280,6 +313,7 @@ b111 <
 b0 ;
 b100 :
 b111 B
+b100 P
 b101 .
 b101 D
 b101 L
@@ -368,6 +402,7 @@ b0 F
 b0 ;
 b0 :
 b11 B
+b101 Q
 b111 .
 b111 D
 b111 L
@@ -457,6 +492,7 @@ b111 <
 b0 ;
 b100 :
 b111 B
+b11 P
 b101 .
 b101 D
 b101 L
