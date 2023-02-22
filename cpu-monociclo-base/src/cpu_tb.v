@@ -59,26 +59,3 @@ begin
 end
 
 endmodule
-
-// initial
-// begin
-//   $dumpfile("cpu_tb.vcd");
-//   $dumpvars;
-//   $dumpvars(0,cpu_tb.micpu.caminodatos.BancoReg.regb[1]);
-//   $dumpvars(0,cpu_tb.micpu.caminodatos.BancoReg.regb[2]);
-//   $dumpvars(0,cpu_tb.micpu.caminodatos.BancoReg.regb[3]);
-//   reset = 1;  //a partir del flanco de subida del reset empieza el funcionamiento normal
-//   #10;
-//   reset = 0;  //bajamos el reset 
-// end
-
-// initial
-
-// begin
-//   #(50*60);  //Esperamos 9 ciclos o 9 instrucciones
-//   $write ("R1 =%d\nR2 =%d =%d\n",
-//   cpu_tb.micpu.caminodatos.BancoReg.regb[1],
-//   cpu_tb.micpu.caminodatos.BancoReg.regb[2],
-//   cpu_tb.micpu.caminodatos.BancoReg.regb[3]);
-//   $finish;
-// end
