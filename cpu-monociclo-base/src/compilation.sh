@@ -23,7 +23,7 @@ func_default()
     read opcion
 
     if [ "$opcion" == "y" ] || [ "$opcion" == "Y" ] ; then
-        gtkwave cpu_tb.vcd
+        gtkwave cpu_tb.vcd &
     elif [ "$opcion" == "n" ] || [ "$opcion" == "N" ]; then
         echo
         echo "No se ha abierto el GTKWAVE"

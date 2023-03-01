@@ -44,7 +44,7 @@ always @(*)
       wez=1'b0;
       op_alu=3'b000;
     end
-
+    
   //Salto Condicional JNZ
   6'b001010:
     begin
