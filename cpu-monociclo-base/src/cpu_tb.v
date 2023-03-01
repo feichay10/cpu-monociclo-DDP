@@ -1,23 +1,3 @@
-/**
- *
- * Universidad de La Laguna
- * Escuela Superior de Ingeniería y Tecnología
- * Grado en Ingeniería Informática
- * Asignatura: Diseño de Procesadores
- * Curso: 3º
- * Proyecto 1: Diseño de la unidad de control de una CPU simple de un solo ciclo
- * @file cpu_tb.v
- * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
- * @brief 
- * @version 0.1
- * @date 01-02-2023
- * @compilation: iverilog -o cpu_base cpu_tb.v alu.v cd.v componentes.v cpu.v memprog.v uc.v
- * @simulation: vvp cpu_base
- *
- * @copyright Copyright (c) 2023
- *
- */
-
 `timescale 1 ns / 10 ps
 
 module cpu_tb;
@@ -40,21 +20,42 @@ initial
 begin
   $dumpfile("cpu_tb.vcd");
   $dumpvars;
-  $dumpvars(0,cpu_tb.micpu.caminodatos.BancoReg.regb[1]);
-  $dumpvars(0,cpu_tb.micpu.caminodatos.BancoReg.regb[2]);
-  $dumpvars(0,cpu_tb.micpu.caminodatos.BancoReg.regb[3]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[1]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[2]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[3]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[4]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[5]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[6]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[7]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[8]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[9]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[10]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[11]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[12]);
+  $dumpvars(0,cpu_tb.micpu.camino_datos.banco_registros.regb[13]);
   reset = 1;  //a partir del flanco de subida del reset empieza el funcionamiento normal
   #10;
   reset = 0;  //bajamos el reset 
 end
 
 initial
+
 begin
-  #(9*60);  //Esperamos 9 ciclos o 9 instrucciones
-  $write ("R1 =%d\nR2 =%d =%d\n",
-  cpu_tb.micpu.caminodatos.BancoReg.regb[1],
-  cpu_tb.micpu.caminodatos.BancoReg.regb[2],
-  cpu_tb.micpu.caminodatos.BancoReg.regb[3]);
+  #(50*60);  //Esperamos 9 ciclos o 9 instrucciones
+  $write ("R1 =%d\nR2 =%d\nR3 =%d\nR4 =%d\nR5 =%d\nR6 =%d\nR7 =%d\nR8 =%d\nR9 =%d\nR10 =%d\nR11 =%d\nR12 =%d\nR13 =%d\n",
+  cpu_tb.micpu.camino_datos.banco_registros.regb[1],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[2],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[3],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[4],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[5],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[6],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[7],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[8],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[9],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[10],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[11],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[12],
+  cpu_tb.micpu.camino_datos.banco_registros.regb[13]);
   $finish;
 end
 
