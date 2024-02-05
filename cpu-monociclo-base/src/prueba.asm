@@ -10,9 +10,3 @@ bucle:
 
 fin:
   j fin           #7
-
-
-
-
-
-  
