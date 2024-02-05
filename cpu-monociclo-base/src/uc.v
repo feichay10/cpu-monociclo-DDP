@@ -24,8 +24,9 @@ always @(*)
       wez=1'b0;
       op_alu=3'b000;
     end
+    
   //Salto Condicional JNZ
-   6'b001010:
+  6'b001010:
     begin
       if (z == 1'b1) 
         s_inc=1'b1;
