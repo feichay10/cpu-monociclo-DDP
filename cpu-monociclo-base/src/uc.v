@@ -2,7 +2,7 @@ module uc(input wire [5:0] opcode, input wire z, output reg s_inc, s_inm, we3, w
 
 always @(*)
   casex (opcode)
-  //Salto incondicional
+  //Salto incondicional J
   6'b001000:
     begin
       s_inc=1'b0;
@@ -38,7 +38,7 @@ always @(*)
       op_alu=3'b000;
     end
 
-  //Carga Inmediata
+  //Carga Inmediata li
   6'b0000??:
     begin
       s_inc=1'b1;
@@ -48,7 +48,7 @@ always @(*)
       op_alu=3'b000;
     end
 
-  //ALU (Oper. A)
+  //ALU (Oper. A) mov
   6'b1000??:
     begin
       s_inc=1'b1;
@@ -58,7 +58,7 @@ always @(*)
       op_alu=3'b000;
     end
   
-  //ALU (Oper. A negado)
+  //ALU (Oper. A negado) not
   6'b1001??:
   begin
     s_inc=1'b1;
@@ -68,7 +68,7 @@ always @(*)
     op_alu=3'b001;
   end
 
-  //ALU (Oper. A + B)
+  //ALU (Oper. A + B) add
   6'b1010??:
   begin
     s_inc=1'b1;
@@ -78,7 +78,7 @@ always @(*)
     op_alu=3'b010;
   end
 
-  //ALU (Oper. A - B)
+  //ALU (Oper. A - B) sub
   6'b1011??:
   begin
     s_inc=1'b1;
@@ -88,7 +88,7 @@ always @(*)
     op_alu=3'b011;
   end
 
-  //ALU (Oper. A AND B)
+  //ALU (Oper. A AND B) and
   6'b1100??:
   begin
     s_inc=1'b1;
@@ -98,7 +98,7 @@ always @(*)
     op_alu=3'b100;
   end
 
-  //ALU (Oper. A OR B)
+  //ALU (Oper. A OR B) or
   6'b1101??:
   begin
     s_inc=1'b1;
@@ -108,7 +108,7 @@ always @(*)
     op_alu=3'b101;
   end
 
-  //ALU (Oper. -A)
+  //ALU (Oper. -A) neg
   6'b1110??:
   begin
     s_inc=1'b1;
@@ -118,7 +118,7 @@ always @(*)
     op_alu=3'b110;
   end
 
-  //ALU (Oper. -B)  
+  //ALU (Oper. -B) neg
   6'b1111??:
   begin
     s_inc=1'b1;

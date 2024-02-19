@@ -4,7 +4,7 @@ Codificacion de cada instrucción:
   - JZ:  001001
   - JNZ: 001010
 
-- Carga Inmediata: 6b'0000??
+- LI Carga Inmediata: 6b'0000??
 
 - Oper. ALU: 6b'1000??
 
