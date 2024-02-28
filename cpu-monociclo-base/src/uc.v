@@ -44,7 +44,8 @@ always @(*)
       s_inc=1'b1;
       s_inm=1'b1;
       we3=1'b1;
-      wez=1'b0;
+      wez=1'b1;
+      // wez=1'b0;
       op_alu=3'b000;
     end
 

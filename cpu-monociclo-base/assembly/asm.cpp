@@ -513,8 +513,8 @@ void ensambla(char* srcfilename, char* dstfilename)
 }
 
 int main(int argc, char* argv[]){
-    char srcfilename[] = "test.asm";
-    char dstfilename[] = "test.mem";
+    char srcfilename[] = "jump_test.asm";
+    char dstfilename[] = "jump_test.mem";
 
     ensambla(srcfilename, dstfilename);
     
